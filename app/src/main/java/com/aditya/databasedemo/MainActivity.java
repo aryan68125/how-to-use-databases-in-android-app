@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         //after we've set our cursor to starting position we have to loop through each row inside the table
         while(!c.isAfterLast()){
-            Log.i("nameStored",c.getString(nameindex)+" = "+c.getString(ageindex));
+            Log.i("nameStored",c.getString(nameindex)+" = "+c.getInt(ageindex));
             c.moveToNext(); //its like i++ but for sql it is essentially updating the cursor inside the users table
         }
     }
