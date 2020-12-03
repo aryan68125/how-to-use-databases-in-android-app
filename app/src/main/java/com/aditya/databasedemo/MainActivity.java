@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
             myDatabase.execSQL("INSERT INTO users (name,age) VALUES('Natasha Malkova', 26)");
             myDatabase.execSQL("INSERT INTO users (name,age) VALUES('Rienna belle', 32)");
             myDatabase.execSQL("INSERT INTO users (name,age) VALUES('Lexi belle', 24)");
+            myDatabase.execSQL("INSERT INTO users (name,age) VALUES('Melody marks', 17)");
+            myDatabase.execSQL("INSERT INTO users (name,age) VALUES('yui Hanato', 18)");
+            myDatabase.execSQL("INSERT INTO users (name,age) VALUES('Victoria Daniels', 19)");
+            myDatabase.execSQL("INSERT INTO users (name,age) VALUES('Isabella', 16)");
+            myDatabase.execSQL("INSERT INTO users (name,age) VALUES('Marry Queen', 20)");
 
             //PULLING DATA OUT OF A DATABASE
             //Cursor c allows us to pull data out of a database
@@ -61,6 +66,28 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("nameStored", c.getString(nameindex) + " = " + c.getInt(ageindex));
                 c.moveToNext(); //its like i++ but for sql it is essentially updating the cursor inside the users table
             }
+
+            //getting names and age of people who's age is less than 20
+            //PULLING DATA OUT OF A DATABASE
+            //Cursor c allows us to pull data out of a database
+            //rawQuery() = pull data out of a database here myDatabase
+            //Cursor c = myDatabase.rawQuery("SELECT * FROM users", null);
+            //SELECT * FROM users = select everything from the table users
+            Cursor c2 = myDatabase.rawQuery("SELECT * FROM users WHERE age <20", null);
+            //if we want to access the name and the age inside the table then we have to get the indexes of the name and age present inside the users table
+            //c.getColumnIndex("name") = it will use cursor c to get the column index for name
+            int nameindex2 = c2.getColumnIndex("name");
+            //c.getColumnIndex("age") = it will use cursor c to get the column index for age
+            int ageindex2 = c2.getColumnIndex("age");
+            //setting the cursor to the starting position
+            c2.moveToFirst();
+
+            //after we've set our cursor to starting position we have to loop through each row inside the table
+            while (!c2.isAfterLast()) {
+                Log.i("LessThan20stored", c2.getString(nameindex2) + " = " + c2.getInt(ageindex2));
+                c2.moveToNext(); //its like i++ but for sql it is essentially updating the cursor inside the users table
+            }
+
         }
         catch (Exception e){
             e.printStackTrace();
